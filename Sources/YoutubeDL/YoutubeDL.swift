@@ -178,18 +178,24 @@ open class YoutubeDL: NSObject {
         }
     }
     
-    open func extractInfo(url: URL) throws -> ([Format], Info?) {
+    open func extractInfo(url: URL, useFormatSelector: Bool = false) throws -> ([Format], Info?) {
         print(#function, url)
         let info = try pythonObject.extract_info.throwing.dynamicallyCall(withKeywordArguments: ["": url.absoluteString, "download": false, "process": true])
         
-        let format_selector = pythonObject.build_format_selector(options["format"])
-        let formats_to_download = format_selector(info)
-        var formats: [Format] = []
-        for format in formats_to_download {
-            guard let dict: [String: PythonObject] = Dictionary(format) else { fatalError() }
-            formats.append(Format(format: dict))
+        if(useFormatSelector) {
+            let format_selector = pythonObject.build_format_selector(options["format"])
+            let formats_to_download = format_selector(info)
+            var formats: [Format] = []
+            for format in formats_to_download {
+                guard let dict: [String: PythonObject] = Dictionary(format) else { fatalError() }
+                formats.append(Format(format: dict))
+            }
+            return (formats, Info(info: info))
         }
-        
+        guard let formatsArray = Array(info["format"]) else {fatalError()}
+        let formats: [Format] = formatsArray.map { fmt in
+            Format(format: fmt))
+        }
         return (formats, Info(info: info))
     }
     
