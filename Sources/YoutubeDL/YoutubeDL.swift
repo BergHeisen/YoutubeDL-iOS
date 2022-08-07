@@ -27,7 +27,7 @@ import PythonSupport
 public struct Info: CustomStringConvertible {
     let info: PythonObject
 
-    var dict: [String: PythonObject]? {
+    public var dict: [String: PythonObject]? {
         Dictionary(info)
     }
 
