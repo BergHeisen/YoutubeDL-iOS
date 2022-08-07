@@ -82,6 +82,8 @@ public struct Format: CustomStringConvertible {
     
     public var isVideoOnly: Bool { self.acodec == "none" }
     
+    public var ext: String? { format["ext"].flatMap {String($0) } }
+    
     public var description: String {
         "\(format["format"] ?? "no format?") \(format["ext"] ?? "no ext?") \(format["vcodec"] ?? "no vcodec?") \(format["filesize"] ?? "no size?")"
     }
