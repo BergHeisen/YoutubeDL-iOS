@@ -192,9 +192,10 @@ open class YoutubeDL: NSObject {
             }
             return (formats, Info(info: info))
         }
-        guard let formatsArray = Array(info["format"]) else {fatalError()}
+        let formatsArray = Array(info["formats"])
         let formats: [Format] = formatsArray.map { fmt in
-            Format(format: fmt))
+            guard let dict: [String: PythonObject] = Dictionary(fmt.pythonObject) else {fatalError()}
+            return Format(format: dict)
         }
         return (formats, Info(info: info))
     }
