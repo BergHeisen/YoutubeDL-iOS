@@ -2,20 +2,11 @@
   "object": {
     "pins": [
       {
-        "package": "Csqlite3",
-        "repositoryURL": "https://github.com/rderik/Csqlite3",
-        "state": {
-          "branch": "master",
-          "revision": "0bdc41ed4a038be74c2eba24dc957aa33d493396",
-          "version": null
-        }
-      },
-      {
         "package": "FFmpeg-iOS",
         "repositoryURL": "https://github.com/kewlbear/FFmpeg-iOS.git",
         "state": {
           "branch": "main",
-          "revision": "a3b82405101de7420c12fe94415a0f0ceedfe114",
+          "revision": "a5b268bd648f0d61179ee04aefdcbcc91cc81e5c",
           "version": null
         }
       },
@@ -24,7 +15,7 @@
         "repositoryURL": "https://github.com/pvieito/LoggerKit.git",
         "state": {
           "branch": "master",
-          "revision": "835b41248dbe474eb33dac2c1ef1376dea7dc11d",
+          "revision": "02487bf1d5b0dcec1fd6ffed750386d617051020",
           "version": null
         }
       },
@@ -32,8 +23,8 @@
         "package": "Python-iOS",
         "repositoryURL": "https://github.com/kewlbear/Python-iOS.git",
         "state": {
-          "branch": "main",
-          "revision": "abe480925415e205f1e2b942b491b73cf93c6ed1",
+          "branch": "kivy-ios",
+          "revision": "1fa595f162b6df0dd729304ac284de8cc31b84f5",
           "version": null
         }
       },
@@ -42,7 +33,7 @@
         "repositoryURL": "https://github.com/kewlbear/PythonKit.git",
         "state": {
           "branch": "master",
-          "revision": "772fefc079e0ed4f3432ecad70aaee1ec7d6f1c3",
+          "revision": "6caffb495e6315a00413f52cb034575965d40989",
           "version": null
         }
       },
@@ -60,7 +51,7 @@
         "repositoryURL": "https://github.com/apple/swift-argument-parser",
         "state": {
           "branch": "main",
-          "revision": "53555a04503c175eaffcf587e4b8c380a7c41a5c",
+          "revision": "df9ee6676cd5b3bf5b330ec7568a5644f547201b",
           "version": null
         }
       }
