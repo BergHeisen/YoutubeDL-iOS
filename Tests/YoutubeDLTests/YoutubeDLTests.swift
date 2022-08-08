@@ -1,15 +1,33 @@
 import XCTest
+import PythonSupport
 @testable import YoutubeDL
 
 final class YoutubeDLTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        YoutubeDL()
+    override func setUp() async throws {
+        PythonSupport.initialize()
+        if #available(iOS 13.0, *) {
+            await withCheckedContinuation{ (continuation: CheckedContinuation<Void, Never>) in
+                if(YoutubeDL.shouldDownloadPythonModule) {
+                    YoutubeDL.downloadPythonModule(completionHandler: { _ in
+                        continuation.resume()
+                    })
+                } else {
+                    continuation.resume()
+                }
+            }
+        } else {
+            fatalError()
+        }
+    }
+    
+    func textInfoExtraction() async throws {
+        let ytdl = try YoutubeDL()
+        let (formats, info) = try ytdl.extractInfo(url: URL.init(string: "https://www.youtube.com/watch?v=WPiEbYSF9kE")!)
+        XCTAssertNotNil(info)
+        
+    }
+    override func tearDown() {
+        PythonSupport.finalize()
     }
 
-    static var allTests = [
-        ("testExample", testExample),
-    ]
 }
