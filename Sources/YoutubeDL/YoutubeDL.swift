@@ -182,6 +182,23 @@ open class YoutubeDL: NSObject {
         }
     }
     
+    
+    func downloadVideo(url: String, destination: URL, resolution: String) async throws {
+            let simpleString = """
+            import yt_dlp
+            with yt_dlp.YoutubeDL({
+                "format": "bestaudio",
+                "outtmpl": "\(destination.path)",
+                "external_downloader_args": ['-loglevel', 'panic'],
+                "overwrites": True,
+                "quiet": True,
+                "nocheckcertificate": True,
+                }) as ydl:
+                    ydl.download("\(url)")
+            """
+            runSimpleString(simpleString)
+        }
+    
     open func extractInfo(url: URL, useFormatSelector: Bool = false) throws -> ([Format], Info?) {
         let info = try pythonObject.extract_info.throwing.dynamicallyCall(withKeywordArguments: ["": url.absoluteString, "download": false, "process": true])
         
