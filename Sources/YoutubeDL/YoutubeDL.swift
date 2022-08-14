@@ -39,6 +39,8 @@ public struct Info: CustomStringConvertible {
         dict.map { Format(format: $0) }
     }
     
+    public var id: String? { dict?["id"].flatMap {String($0)} }
+    
     public var formats: [Format] {
         let array: [PythonObject]? = dict?["formats"].flatMap { Array($0) }
         let dicts: [[String: PythonObject]?]? = array?.map { Dictionary($0) }
@@ -73,6 +75,8 @@ public struct Format: CustomStringConvertible {
         
         return request
     }
+    
+    public var formatId: String? { format["format_id"].flatMap { String($0) }}
     
     public var height: Int? { format["height"].flatMap { Int($0) } }
     
