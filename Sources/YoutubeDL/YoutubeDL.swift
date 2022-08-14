@@ -183,6 +183,40 @@ open class YoutubeDL: NSObject {
     }
     
     
+    
+    func setupProgressHook(destination: URL) {
+        
+       let progressHook = """
+       def progressHook(d):
+           file = open("\(destination.path)", "w")
+           if d['status'] == 'downloading':
+                file.write(f"{d['_percent_str']}\\n")
+           if d['status'] == 'finished':
+                file.write('')
+           file.close()
+       """
+        runSimpleString(progressHook);
+    }
+    func downloadVideo(url: String, destination: URL, resolution: String, progressHookDestination: URL) {
+        self.setupProgressHook(destination: progressHookDestination)
+        let simpleString = """
+        import yt_dlp
+        with yt_dlp.YoutubeDL({
+            "format": "bestaudio",
+            "outtmpl": "\(destination.path)",
+            "overwrites": True,
+            "quiet": True,
+            "nocheckcertificate": True,
+            "progress_hooks": [progressHook]
+            }) as ydl:
+                ydl.download("\(url)")
+        """
+    
+        runSimpleString(simpleString)
+    }
+    
+    
+    
     func downloadVideo(url: String, destination: URL, resolution: String) async throws {
             let simpleString = """
             import yt_dlp
