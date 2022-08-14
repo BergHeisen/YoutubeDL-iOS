@@ -183,7 +183,6 @@ open class YoutubeDL: NSObject {
     }
     
     open func extractInfo(url: URL, useFormatSelector: Bool = false) throws -> ([Format], Info?) {
-        print(#function, url)
         let info = try pythonObject.extract_info.throwing.dynamicallyCall(withKeywordArguments: ["": url.absoluteString, "download": false, "process": true])
         
         if(useFormatSelector) {
